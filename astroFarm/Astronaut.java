@@ -3,6 +3,7 @@ public class Astronaut{
     int level;
     int ticks;
     TrainingAlgo algo;
+    //ArrayList<Plant> plants; TODO: implement plants, allow astronaut to have multiple amounts of various plants
     Boolean inTraining;
     public Astronaut(String name){
         this.name = name;
@@ -31,6 +32,7 @@ public class Astronaut{
         ticks = 0;
         this.algo = new TrainingAlgo();
         inTraining=false;
+    }
     public void train(){
         if(inTraining && ticks==1){
             level++;
@@ -45,5 +47,24 @@ public class Astronaut{
         if(ticks>0){
             ticks--;
         }
+    }
+    public String toString(){
+        String printString = "Name: " + name;
+        printString+="\nLevel: " + level;
+        printString+="\nCurrent Status: ";
+        if(ticks==0){
+            printString+="Inactive";
+        }
+        else{
+            /*if(currPlant!=null){ TODO: implement plants
+                printString+="Planting " + getCurrPlants();
+            }*/
+            //else{
+                printString+="Training, " + ticks + " ticks left.";
+            //}
+        }
+        printString+="\nSoil type: " + soil;
+        printString+="\n";
+        return printString;
     }
 }

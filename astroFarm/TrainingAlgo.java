@@ -9,6 +9,13 @@ public class TrainingAlgo{
        return temp; 
     }
     public int getTicks(int level){
-        int multiplier = Math.abs((currPlanet.getGravity()/9.8)-1);
+        double gravMultiplier = Math.abs(currPlanet.getGravity()/9.8);
+        if(gravMultiplier<1.0){
+            gravMultiplier=1/gravMultiplier;
+        }
+        gravMultiplier*=3;
+        double usedLevel = (double)level * 5;
+        int calcTicks = (int)(gravMultiplier*usedLevel/15);
+        return calcTicks;
     }
 }
