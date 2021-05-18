@@ -1,8 +1,10 @@
 import java.util.*;
 public class User {
         private final String[] atmospheres = {"No Atmosphere", "CO2 Heavy", "Earth-like", "Gas Giant"};
+	private ArrayList<Planet> farmers;
     public static void main(String[] args){
-        ArrayList<Astronaut> farmers = new ArrayList<Astronaut>();
+       	Boolean keepGoing = true; 
+	farmers = new ArrayList<Astronaut>();
         ArrayList<Planet> knownPlanets = new ArrayList<Planet>();
         addInitialPlanets(knownPlanets);
 	//System.out.println(knownPlanets.toString());
@@ -19,5 +21,11 @@ public class User {
 	planetList.add(new Planet("Saturn", 10.44, "Gas Giant"));
 	planetList.add(new Planet("Uranus", 8.69, "Gas Giant"));
 	planetList.add(new Planet("Neptune", 11.15, "Gas Giant"));
+    }
+    private static void printStatus(){
+	System.out.println("\n current status of astronauts: ");
+	for(Astronaut farmer : farmers){
+		System.out.println(farmer.toString());
+	}
     }
 }
