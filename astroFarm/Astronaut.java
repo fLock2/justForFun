@@ -3,13 +3,15 @@ public class Astronaut{
     int level;
     int ticks;
     TrainingAlgo algo;
-    //ArrayList<Plant> plants; TODO: implement plants, allow astronaut to have multiple amounts of various plants
+    Planet currPlanet;
+    //ArrayBag<Plant> plants; TODO: implement plants, allow astronaut to have multiple amounts of various plants
     Boolean inTraining;
     public Astronaut(String name){
         this.name = name;
         level = 1;
         ticks = 0;
-        algo = new TrainingAlgo();
+        currPlanet = new Planet("Earth", 9.8, "Earth-like");
+        algo = new TrainingAlgo(currPlanet);
         inTraining=false;
     }
     public Astronaut(String name, TrainingAlgo algo){
@@ -30,15 +32,25 @@ public class Astronaut{
         this.name = name;
         this.level = level;
         ticks = 0;
-        this.algo = new TrainingAlgo();
+        algo = new TrainingAlgo(new Planet("Earth", 9.8, "Earth-like")); 
+        inTraining=false;
+    }
+    public Astronaut(String name, int level, Planet planet, TrainingAlgo algo){ // should be used 99% of the time, others are for redundancy
+        this.name = name;
+        this.level = level;
+        ticks = 0;
+        currPlanet = planet;
+        this.algo = algo;
         inTraining=false;
     }
     public void train(){
-        if(inTraining && ticks==1){
-            level++;
-            inTraining=false;
+        if(inTraining){
+            if(inTraining && ticks==1){
+                level++;
+                inTraining=false;
+            }
+           tick(); 
         }
-       tick(); 
     }
     public void startTraining(){
         ticks = algo.getTicks(level);
@@ -51,6 +63,7 @@ public class Astronaut{
     public String toString(){
         String printString = "Name: " + name;
         printString+="\nLevel: " + level;
+        printString+="\nCurrent Planet: " + currPlanet.getName();
         printString+="\nCurrent Status: ";
         if(ticks==0){
             printString+="Inactive";
@@ -63,8 +76,6 @@ public class Astronaut{
                 printString+="Training, " + ticks + " ticks left.";
             //}
         }
-        printString+="\nSoil type: " + soil;
-        printString+="\n";
         return printString;
     }
 }
