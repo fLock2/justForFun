@@ -7,7 +7,8 @@ public class User {
 	farmers = new ArrayList<Astronaut>();
         ArrayList<Planet> knownPlanets = new ArrayList<Planet>();
         addInitialPlanets(knownPlanets);
-	//System.out.println(knownPlanets.toString());
+	printArrList(knownPlanets);
+	System.out.print("What do you want to name your first Astronaut? ");
     }
     private static void addInitialPlanets(ArrayList<Planet> planetList){
         if(planetList.size()>=1){
